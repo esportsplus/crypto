@@ -1,5 +1,25 @@
+function toBase64(buffer: BlobPart) {
+    return new Promise((resolve, reject) => {
+        var blob = new Blob([buffer], { type: 'application/octet-binary' }),
+            reader = new FileReader();
+
+        reader.onload = function () {
+            let result = reader.result;
+
+            if (typeof result !== 'string') {
+                return reject();
+            }
+
+            return resolve( result.slice( result.indexOf(',') + 1 ) );
+        };
+        reader.readAsDataURL(blob);
+    });
+}
+
+
 export default async (content: string, password: string) => {
-    let alg = {
+    try {
+        let alg = {
             iv: crypto.getRandomValues(new Uint8Array(12)),
             name: 'AES-GCM'
         },
@@ -7,5 +27,9 @@ export default async (content: string, password: string) => {
         key = await crypto.subtle.importKey('raw', hash, alg, false, ['encrypt']),
         ciphertext = await crypto.subtle.encrypt(alg, key, new TextEncoder().encode(content));
 
-    return Buffer.from(ciphertext).toString('base64') + '.' + Buffer.from(alg.iv).toString('base64');
+        return toBase64(ciphertext) + '.' + toBase64(alg.iv);
+    }
+    catch (e) { }
+
+    return null;
 };

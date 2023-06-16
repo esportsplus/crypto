@@ -1,11 +1,11 @@
 {
     "author": "ICJR",
-    "description": "data",
+    "description": "General crypto helpers",
     "devDependencies": {
         "@esportsplus/rspack": "^0.0.10"
     },
     "main": "build/index.js",
-    "name": "@esportsplus/data",
+    "name": "@esportsplus/crypto",
     "private": false,
     "scripts": {
         "build": "tsc && tsc-alias",

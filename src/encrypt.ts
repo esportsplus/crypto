@@ -1,16 +1,11 @@
 export default async (content: string, password: string) => {
-    try {
-        let alg = {
-                iv: crypto.getRandomValues(new Uint8Array(12)),
-                name: 'AES-GCM'
-            },
-            hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password)),
-            key = await crypto.subtle.importKey('raw', hash, alg, false, ['encrypt']),
-            ciphertext = await crypto.subtle.encrypt(alg, key, new TextEncoder().encode(content));
+    let alg = {
+            iv: crypto.getRandomValues(new Uint8Array(12)),
+            name: 'AES-GCM'
+        },
+        hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password)),
+        key = await crypto.subtle.importKey('raw', hash, alg, false, ['encrypt']),
+        ciphertext = await crypto.subtle.encrypt(alg, key, new TextEncoder().encode(content));
 
-        return Buffer.from(ciphertext).toString('base64') + '.' + Buffer.from(alg.iv).toString('base64');
-    }
-    catch (e) { }
-
-    return null;
+    return Buffer.from(ciphertext).toString('base64') + '.' + Buffer.from(alg.iv).toString('base64');
 };

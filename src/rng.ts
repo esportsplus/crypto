@@ -1,4 +1,6 @@
-let max = Math.pow(2, 32);
+const MAX = Math.pow(2, 32);
 
 
-export default () => crypto.getRandomValues( new Uint32Array(10) )[0] / max;
+export default () => {
+    return crypto.getRandomValues( new Uint32Array(10) )[0] / MAX;
+};

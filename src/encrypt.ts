@@ -4,8 +4,12 @@ export default async (content: string, password: string) => {
             name: 'AES-GCM'
         },
         hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password)),
-        key = await crypto.subtle.importKey('raw', hash, alg, false, ['encrypt']),
-        ciphertext = await crypto.subtle.encrypt(alg, key, new TextEncoder().encode(content));
+        key = await crypto.subtle.importKey('raw', hash, alg, false, ['encrypt']);
 
-    return Buffer.from(ciphertext).toString('base64') + '.' + Buffer.from(alg.iv).toString('base64');
+    return [
+        Buffer.from(
+            await crypto.subtle.encrypt(alg, key, new TextEncoder().encode(content))
+        ).toString('base64'),
+        Buffer.from(alg.iv).toString('base64')
+    ].join('.');
 };

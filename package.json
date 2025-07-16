@@ -1,8 +1,8 @@
 {
     "author": "ICJR",
     "dependencies": {
-        "@esportsplus/typescript": "^0.8.11",
-        "@esportsplus/utilities": "^0.9.1"
+        "@esportsplus/typescript": "^0.9.1",
+        "@esportsplus/utilities": "^0.13.2"
     },
     "devDependencies": {
         "@types/node": "^22.15.30"

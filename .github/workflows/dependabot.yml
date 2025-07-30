@@ -1,0 +1,10 @@
+name: dependabot
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+  workflow_dispatch:
+jobs:
+  automerge:
+    secrets:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    uses: esportsplus/workflows/.github/workflows/dependabot.yml@main

@@ -1,10 +1,13 @@
-name: dependabot
+name: dependabot auto merge
+
 on:
   pull_request:
     types: [opened, synchronize, labeled]
   workflow_dispatch:
+
 jobs:
   automerge:
     secrets:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     uses: esportsplus/workflows/.github/workflows/dependabot.yml@main

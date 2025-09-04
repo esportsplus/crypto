@@ -5,7 +5,7 @@
         "@esportsplus/utilities": "^0.22.1"
     },
     "devDependencies": {
-        "@types/node": "^24.3.0"
+        "@types/node": "^24.3.1"
     },
     "main": "build/index.js",
     "name": "@esportsplus/crypto",
